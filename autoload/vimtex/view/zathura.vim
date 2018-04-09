@@ -110,7 +110,7 @@ function! s:zathura.latexmk_append_argument() dict " {{{1
           \ 'zathura ' . g:vimtex_view_zathura_options
           \ . ' -x \"' . g:vimtex_compiler_progname
           \ . ' --servername ' . v:servername
-          \ . ' --remote +\%{line} \%{input}\" \%S')
+          \ . ' -c VimtexReverseGoto\\ \%{line}\\ \%{input}\" \%S')
   endif
 
   return cmd

@@ -69,7 +69,11 @@ function! vimtex#view#reverse_goto(line, filename) " {{{1
 
   if !bufexists(l:file)
     if filereadable(l:file)
-      execute 'silent edit' l:file
+      if &switchbuf =~# 'usetab'
+        execute 'tabedit ' . l:file
+      else 
+        execute 'silent edit' l:file
+      endif 
     else
       call vimtex#log#warning("Reverse goto failed for file:\n" . l:file)
       return
@@ -101,4 +105,5 @@ function! vimtex#view#reverse_goto(line, filename) " {{{1
   endif
 endfunction
 
+command! -nargs=+ VimtexReverseGoto :call vimtex#view#reverse_goto(<f-args>)<cr>
 " }}}1
